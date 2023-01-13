@@ -24,6 +24,7 @@ const addNote = () => {
   })
   isVisible.value = false
   newNote.value = ""
+  errorMessage.value = ""
 }
 
 
@@ -36,7 +37,7 @@ const addNote = () => {
       </div>
       <div class="modal-content">
 
-        <textarea name="" id="" cols="30" rows="10" v-model="newNote"></textarea>
+        <textarea name="" id="" cols="30" rows="10" v-model.trim="newNote"></textarea>
         <p class="error" v-if="errorMessage">{{ errorMessage }}</p>
         <button @click="addNote()">Add notes</button>
       </div>
