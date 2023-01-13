@@ -43,7 +43,7 @@ const addNote = () => {
         <button @click="isVisible = true">Plus</button>
       </header>
       <div class="card-wp">
-        <div class="card" v-for="(note, i) in notes" :key="i">
+        <div class="card" v-for="(note, i) in notes" :key="i" :style="{ backgroundColor: note.backgroundColor }">
           <p class="maintext">{{ note.text }}</p>
           <div class="date">{{ note.date }}</div>
         </div>
