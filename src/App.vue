@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 
 const isVisible = ref(false);
+const errorMessage = ref("")
 const newNote = ref("");
 const notes = ref([]);
 
@@ -12,6 +13,9 @@ function randomColor() {
 }
 
 const addNote = () => {
+  if (newNote.value.length <= 10) {
+    return errorMessage.value = "Notes needs to be 10 or more characters!"
+  }
   notes.value.push({
     id: Math.floor(Math.random() * 5000),
     text: newNote.value,
@@ -33,6 +37,7 @@ const addNote = () => {
       <div class="modal-content">
 
         <textarea name="" id="" cols="30" rows="10" v-model="newNote"></textarea>
+        <p class="error" v-if="errorMessage">{{ errorMessage }}</p>
         <button @click="addNote()">Add notes</button>
       </div>
 
@@ -43,7 +48,7 @@ const addNote = () => {
         <button @click="isVisible = true">Plus</button>
       </header>
       <div class="card-wp">
-        <div class="card" v-for="(note, i) in notes" :key="i" :style="{ backgroundColor: note.backgroundColor }">
+        <div class="card" v-for="note in notes" :key="note.id" :style="{ backgroundColor: note.backgroundColor }">
           <p class="maintext">{{ note.text }}</p>
           <div class="date">{{ note.date }}</div>
         </div>
@@ -134,5 +139,9 @@ h1 {
   border: none;
   padding: 0.75rem;
   color: #000;
+}
+
+.error {
+  color: red;
 }
 </style>
